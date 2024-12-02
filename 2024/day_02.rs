@@ -1,7 +1,6 @@
-use std::{fs::File, io::{BufRead, BufReader}};
 
 fn is_safe(line: &[i32], skip: Option<usize>) -> bool {
-    let mut first = &line[..];
+    let mut first = line;
     let mut second: &[i32] = &[];
 
     if let Some(n) = skip {
@@ -12,7 +11,7 @@ fn is_safe(line: &[i32], skip: Option<usize>) -> bool {
     let it = first.iter().chain(second.iter());
 
     let n1 = it.clone().next().unwrap();
-    let n2 = it.clone().skip(1).next().unwrap();
+    let n2 = it.clone().nth(1).unwrap();
     let increase = n2 > n1;
 
     it.clone()
@@ -22,18 +21,16 @@ fn is_safe(line: &[i32], skip: Option<usize>) -> bool {
             false
         } else {
             let diff = (b - a).abs();
-            diff >= 1 && diff <= 3
+            (1..=3).contains(&diff)
         }
     })
 }
 
-fn main() {
-    let f = File::open("input.txt").expect("Error opening file");
-    let f = BufReader::new(f);
-
-    let lines: Vec<Box<[i32]>> =
-        f.lines().map_while(Result::ok).map(|line| {
-            let line: Vec<i32> =
+pub fn main() {
+    let lines: Vec<_> =
+        aoc::get_input_file_lines()
+        .map(|line| {
+            let line: Vec<_> =
                 line.split_whitespace()
                     .map(|s| s.parse::<i32>().unwrap())
                     .collect();
