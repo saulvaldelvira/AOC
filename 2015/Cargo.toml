@@ -1,0 +1,13 @@
+[package]
+name = "AOC_2015"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "aoc"
+path = "lib.rs"
+
+[[bin]]
+name = "day_01"
+path = "day_01.rs"
+
