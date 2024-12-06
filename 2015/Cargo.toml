@@ -11,3 +11,6 @@ path = "lib.rs"
 name = "day_01"
 path = "day_01.rs"
 
+[[bin]]
+name = "day_02"
+path = "day_02.rs"
