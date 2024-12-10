@@ -3,6 +3,34 @@ use std::fs::File;
 use std::io::{BufRead, BufReader};
 use std::process;
 
+#[macro_export]
+macro_rules! solution {
+    () => {
+        pub fn main() {
+            let arg = std::env::args().skip(1).next();
+            let fname = arg.as_deref().unwrap_or("input.txt");
+            let src = std::fs::read_to_string(fname)
+                              .unwrap_or_else(|_| {
+                                  eprintln!("File \"{fname}\" not found");
+                                  std::process::exit(1);
+                              });
+
+            let start = std::time::Instant::now();
+            let (part1,part2) = solve(&src);
+            let end = start.elapsed();
+            println!("Part 1: {part1}");
+            println!("Part 2: {part2}\n");
+            let us = (end.as_nanos() as f64 / 1000.0).round();
+            let ms = end.as_millis();
+            if us > 1000.0 {
+                println!("Time: {ms} ms ({us} \u{00B5}s)");
+            } else {
+                println!("Time: {us} \u{00B5}s");
+            }
+        }
+    };
+}
+
 pub fn get_input_file() -> BufReader<File> {
     let f = File::open("input.txt").unwrap_or_else(|err| {
         eprintln!("Error opening file: {err}");

@@ -45,11 +45,7 @@ fn solve(src: &str) -> (u64,u64) {
     })
 }
 
-pub fn main() {
-    let (part1,part2) = solve(include_str!("input.txt"));
-    println!("Part 1: {part1}");
-    println!("Part 2: {part2}");
-}
+aoc::solution!();
 
 #[cfg(test)]
 mod test {

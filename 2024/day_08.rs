@@ -1,7 +1,7 @@
 use std::collections::{HashMap, HashSet};
 use aoc::point::Point;
 
-fn solve(src: &str) -> (Vec<Point<i32>>,Vec<Point<i32>>) {
+fn solve(src: &str) -> (usize,usize) {
     let width = src.lines().next().unwrap().len() as i32;
     let height = src.lines().filter(|l| !l.is_empty()).count() as i32;
 
@@ -61,17 +61,12 @@ fn solve(src: &str) -> (Vec<Point<i32>>,Vec<Point<i32>>) {
     }
 
     (
-        antinodes_pt1.into_iter().collect(),
-        antinodes_pt2.into_iter().collect()
+        antinodes_pt1.len(),
+        antinodes_pt2.len()
     )
 }
 
-pub fn main() {
-    let (part1,part2) = solve(include_str!("input.txt"));
-
-    println!("Part 1: {}", part1.len());
-    println!("Part 2: {}", part2.len());
-}
+aoc::solution!();
 
 #[cfg(test)]
 mod test {
@@ -92,7 +87,7 @@ mod test {
 .........A..
 ............
 ............");
-        assert_eq!(part1.len(), 14);
-        assert_eq!(part2.len(), 34);
+        assert_eq!(part1, 14);
+        assert_eq!(part2, 34);
     }
 }

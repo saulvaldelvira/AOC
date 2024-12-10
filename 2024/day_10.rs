@@ -100,11 +100,7 @@ fn solve(src: &str) -> (i32,i32) {
     (part1,part2)
 }
 
-pub fn main() {
-    let (part1,part2) = solve(include_str!("input.txt"));
-    println!("Part 1: {part1}");
-    println!("Part 2: {part2}");
-}
+aoc::solution!();
 
 #[cfg(test)]
 mod test {
