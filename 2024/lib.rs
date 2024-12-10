@@ -1,3 +1,4 @@
+use core::str;
 use std::fs::File;
 use std::io::{BufRead, BufReader};
 use std::process;
@@ -15,6 +16,18 @@ pub fn get_input_file_lines() -> impl Iterator<Item = String> {
     .lines()
     .map_while(Result::ok)
     .filter(|l| !l.is_empty())
+}
+
+pub fn input_to_char_array(src: &str) -> Box<[Box<[char]>]> {
+    src.lines().filter(|l| !l.is_empty()).map(|l| {
+        l.chars().collect::<Vec<_>>().into_boxed_slice()
+    }).collect::<Vec<_>>().into_boxed_slice()
+}
+
+pub fn input_to_byte_array(src: &str) -> Box<[Box<[u8]>]> {
+    src.lines().filter(|l| !l.is_empty()).map(|l| {
+        l.bytes().collect::<Vec<_>>().into_boxed_slice()
+    }).collect::<Vec<_>>().into_boxed_slice()
 }
 
 #[allow(private_bounds)]
@@ -69,6 +82,17 @@ pub mod point {
             Point {
                 x: self.x + rhs.x,
                 y: self.y + rhs.y,
+            }
+        }
+    }
+
+    impl<T: Numeric> Add<(T,T)> for Point<T> {
+        type Output = Self;
+
+        fn add(self, rhs: (T,T)) -> Self::Output {
+            Point {
+                x: self.x + rhs.0,
+                y: self.y + rhs.1,
             }
         }
     }

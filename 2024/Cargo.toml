@@ -43,6 +43,10 @@ path = "day_08.rs"
 name = "day_09"
 path = "day_09.rs"
 
+[[bin]]
+name = "day_10"
+path = "day_10.rs"
+
 [dependencies]
 regexpr = "0.1.6"
 
