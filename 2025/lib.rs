@@ -7,7 +7,7 @@ pub fn run(solve: impl FnOnce() -> (usize, usize)) {
     let (part1,part2) = solve();
     let end = start.elapsed();
     println!("Part 1: {part1}");
-    println!("Part 2: {part2}\n");
+    println!("Part 2: {part2}");
     let ms = end.as_millis();
     println!("Time: {ms} ms");
 }
