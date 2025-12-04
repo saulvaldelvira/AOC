@@ -1,5 +1,5 @@
 use std::fs::File;
-use std::io::{BufRead, BufReader};
+use std::io::{BufRead, BufReader, Read};
 use std::process;
 
 pub fn run(solve: impl FnOnce() -> (usize, usize)) {
@@ -10,6 +10,12 @@ pub fn run(solve: impl FnOnce() -> (usize, usize)) {
     println!("Part 2: {part2}\n");
     let ms = end.as_millis();
     println!("Time: {ms} ms");
+}
+
+pub fn get_input_string() -> String {
+    let mut s = String::new();
+    get_input_file().read_to_string(&mut s).unwrap();
+    s
 }
 
 pub fn get_input_file() -> BufReader<File> {
