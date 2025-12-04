@@ -9,7 +9,11 @@ pub fn run(solve: impl FnOnce() -> (usize, usize)) {
     println!("Part 1: {part1}");
     println!("Part 2: {part2}");
     let ms = end.as_millis();
-    println!("Time: {ms} ms");
+    if ms > 0 {
+        println!("Time: {ms} ms");
+    } else {
+        println!("Time: {} \u{00B5}s", end.as_micros());
+    }
 }
 
 pub fn get_input_string() -> String {

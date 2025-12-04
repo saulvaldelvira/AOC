@@ -1,27 +1,19 @@
-use std::thread;
 
-fn find_permutations(mut max: usize, acc: usize, n_digits: u32, slice: &[u8]) -> usize {
-    if slice.len() < n_digits as usize { return max }
-    let mut max_possible = acc * 10_usize.pow(n_digits);
-    for i in 0..n_digits {
-        max_possible += 9 * 10_usize.pow(i);
-    }
-    if max_possible < max { return max }
-    for i in 0..slice.len() {
-        let m = acc * 10 + (slice[i] - b'0') as usize;
-        if n_digits == 1 {
-            max = usize::max(max, m);
-        } else {
-            max = find_permutations(max, m, n_digits - 1, slice.get(1 + i..).unwrap_or(&[]));
-        }
-    }
-    max
-}
+fn find_biggest_combination(n_digits: usize, mut slice: &[u8]) -> usize {
+    let mut sol = 0;
+    for i in (0..n_digits).rev() {
+        let (best_index, n) = slice
+            .iter()
+            .enumerate()
+            .rev()
+            .skip(i)
+            .max_by_key(|a| a.1)
+            .unwrap();
 
-fn get_max_combination(line: &str) -> (usize, usize) {
-    let part1 = find_permutations(0, 0, 2, line.as_bytes());
-    let part2 = find_permutations(0, 0, 12, line.as_bytes());
-    (part1, part2)
+        slice = &slice[best_index+1..];
+        sol = sol * 10 + (n - b'0') as usize;
+    }
+    sol
 }
 
 pub fn solve<I, S>(input: I) -> (usize, usize)
@@ -33,37 +25,17 @@ where
     let mut part2 = 0;
 
     for line in input {
-        let (p1, p2) = get_max_combination(line.as_ref());
-        part1 += p1;
-        part2 += p2;
+        let line = line.as_ref();
+        part1 += find_biggest_combination(2, line.as_bytes());
+        part2 += find_biggest_combination(12, line.as_bytes());
     }
 
     (part1, part2)
 }
 
-pub fn solve_pararell(input: &[String]) -> (usize, usize) {
-    thread::scope(|scope| {
-        let threads: Vec<_> = input.iter().map(|line| {
-            scope.spawn(|| get_max_combination(line))
-        }).collect();
-
-        let mut part1 = 0;
-        let mut part2 = 0;
-
-        for t in threads {
-            let (p1, p2) = t.join().unwrap();
-            part1 += p1;
-            part2 += p2;
-        }
-
-        (part1, part2)
-    })
-
-}
-
 fn main() {
-    let input: Vec<String> = aoc::get_input_file_lines().collect();
-    aoc::run(|| solve_pararell(&input));
+    let input = aoc::get_input_file_lines();
+    aoc::run(|| solve(input));
 }
 
 #[cfg(test)]
