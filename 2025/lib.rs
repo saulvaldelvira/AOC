@@ -36,3 +36,9 @@ pub fn get_input_file_lines() -> impl Iterator<Item = String> {
     .map_while(Result::ok)
     .filter(|l| !l.is_empty())
 }
+
+pub fn get_input_matrix() -> Vec<Vec<u8>> {
+    get_input_file_lines()
+    .map(|line| line.into_bytes())
+    .collect()
+}
