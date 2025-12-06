@@ -1,3 +1,4 @@
+use core::fmt::Display;
 use std::fs::File;
 use std::io::{BufRead, BufReader, Read};
 use std::process;
@@ -12,7 +13,10 @@ macro_rules! num_digits {
     };
 }
 
-pub fn run(solve: impl FnOnce() -> (usize, usize)) {
+pub fn run<T>(solve: impl FnOnce() -> (T, T))
+where
+    T: Display
+{
     let start = std::time::Instant::now();
     let (part1,part2) = solve();
     let end = start.elapsed();
