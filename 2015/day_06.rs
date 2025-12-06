@@ -74,7 +74,7 @@ fn solve(src: &str) -> (usize,i32) {
 }
 
 pub fn main() {
-    let (part1,part2) = solve(include_str!("input.txt"));
+    let (part1,part2) = solve(&aoc::get_input_string());
     println!("Part 1: {part1}");
     println!("Part 2: {part2}");
 }
