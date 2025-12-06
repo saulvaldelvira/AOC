@@ -2,6 +2,16 @@ use std::fs::File;
 use std::io::{BufRead, BufReader, Read};
 use std::process;
 
+#[macro_export]
+macro_rules! num_digits {
+    ($n:expr) => {
+        match $n.checked_ilog10() {
+            Some(n) => n + 1,
+            None => 1,
+        }
+    };
+}
+
 pub fn run(solve: impl FnOnce() -> (usize, usize)) {
     let start = std::time::Instant::now();
     let (part1,part2) = solve();
