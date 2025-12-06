@@ -35,6 +35,10 @@ path = "day_06.rs"
 name = "day_07"
 path = "day_07.rs"
 
+[[bin]]
+name = "day_08"
+path = "day_08.rs"
+
 [dependencies]
 fancy-regex = "0.14.0"
 md5 = "0.7.0"
