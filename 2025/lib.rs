@@ -1,3 +1,4 @@
+use core::time::Duration;
 use std::fs::File;
 use std::io::{BufRead, BufReader, Read};
 use std::process;
@@ -12,17 +13,28 @@ macro_rules! num_digits {
     };
 }
 
+pub fn measure<T>(func: impl FnOnce() -> T) -> (T, Duration) {
+    let start = std::time::Instant::now();
+    let ret = func();
+    let end = start.elapsed();
+    (ret, end)
+}
+
 pub fn run(solve: impl FnOnce() -> (usize, usize)) {
     let start = std::time::Instant::now();
     let (part1,part2) = solve();
     let end = start.elapsed();
     println!("Part 1: {part1}");
     println!("Part 2: {part2}");
-    let ms = end.as_millis();
+    print_time(end);
+}
+
+pub fn print_time(t: Duration) {
+    let ms = t.as_millis();
     if ms > 0 {
-        println!("Time: {ms} ms");
+        println!("{ms} ms");
     } else {
-        println!("Time: {} \u{00B5}s", end.as_micros());
+        println!("{} \u{00B5}s", t.as_micros());
     }
 }
 
@@ -52,3 +64,14 @@ pub fn get_input_matrix() -> Vec<Vec<u8>> {
     .map(|line| line.into_bytes())
     .collect()
 }
+
+pub fn permutations<T>(arr: &[T]) -> impl Iterator<Item = (&T, &T)> {
+    (0..arr.len())
+    .flat_map(move |i| {
+        (i+1..arr.len())
+        .map(move |j| {
+            (&arr[i], &arr[j])
+        })
+    })
+}
+
