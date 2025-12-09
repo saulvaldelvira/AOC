@@ -34,7 +34,7 @@ where
 }
 
 fn main() {
-    let input = aoc::get_input_file_lines();
+    let input = aoc::get_input_lines();
     aoc::run(|| solve(input));
 }
 

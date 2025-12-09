@@ -1,4 +1,4 @@
-use aoc::get_input_file_lines;
+use aoc::get_input_lines;
 use aoc::num_digits;
 
 fn solve(lines: &[String]) -> (usize, usize) {
@@ -103,7 +103,7 @@ fn solve(lines: &[String]) -> (usize, usize) {
 }
 
 fn main() {
-    let input: Vec<String> = get_input_file_lines().collect();
+    let input: Vec<String> = get_input_lines().collect();
     aoc::run(|| solve(&input));
 }
 

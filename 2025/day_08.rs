@@ -101,7 +101,7 @@ fn solve(n_iter_pt1: usize, context: Context<'_>) -> (usize, usize) {
 
 fn main() {
     let start = Instant::now();
-    let input: Vec<_> = aoc::get_input_file_lines().collect();
+    let input: Vec<_> = aoc::get_input_lines().collect();
     let jboxes = build_jboxes(&input);
     let ctx = build_context(&jboxes);
     let end = start.elapsed();

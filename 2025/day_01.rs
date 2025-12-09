@@ -1,6 +1,6 @@
 use core::ops::{AddAssign, SubAssign};
 
-use aoc::get_input_file_lines;
+use aoc::get_input_lines;
 
 fn solve<S: AsRef<str>>(it: impl Iterator<Item = S>) -> (usize, usize) {
     let mut dial = 50_i16;
@@ -39,7 +39,7 @@ fn solve<S: AsRef<str>>(it: impl Iterator<Item = S>) -> (usize, usize) {
 }
 
 fn main() {
-    let input = get_input_file_lines();
+    let input = get_input_lines();
     aoc::run(|| solve(input));
 }
 

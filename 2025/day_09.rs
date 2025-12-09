@@ -158,7 +158,7 @@ fn solve(input: &[impl AsRef<str>]) -> (usize, usize) {
 }
 
 fn main() {
-    let input: Vec<_> = aoc::get_input_file_lines().collect();
+    let input: Vec<_> = aoc::get_input_lines().collect();
     aoc::run(|| solve(&input));
 }
 

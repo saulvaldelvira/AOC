@@ -60,7 +60,7 @@ pub fn get_input_file() -> BufReader<File> {
     BufReader::new(f)
 }
 
-pub fn get_input_file_lines() -> impl Iterator<Item = String> {
+pub fn get_input_lines() -> impl Iterator<Item = String> {
     get_input_file()
     .lines()
     .map_while(Result::ok)
@@ -68,11 +68,27 @@ pub fn get_input_file_lines() -> impl Iterator<Item = String> {
 }
 
 pub fn get_input_matrix() -> Vec<Vec<u8>> {
-    get_input_file_lines()
+    get_input_lines()
     .map(|line| line.into_bytes())
     .collect()
 }
 
+/// Iterates over all possible pairs of elements of a slice
+///
+/// # Example
+/// ```
+/// use aoc::permutations;
+///
+/// let arr = [1, 2, 3, 4];
+/// let mix: Vec<_> = permutations(&arr)
+///     .map(|(&a, &b)| (a, b))
+///     .collect();
+///
+/// assert_eq!(&mix, &[
+///     (1, 2), (1, 3), (1, 4),
+///     (2, 3), (2, 4), (3, 4)
+/// ])
+/// ```
 pub fn permutations<T>(arr: &[T]) -> impl Iterator<Item = (&T, &T)> {
     (0..arr.len())
     .flat_map(move |i| {
@@ -83,6 +99,22 @@ pub fn permutations<T>(arr: &[T]) -> impl Iterator<Item = (&T, &T)> {
     })
 }
 
+/// Iterates the slice in chunks of 2, wrapping the last element with the first one
+///
+/// # Example
+/// ```
+/// use aoc::pairs_wrap;
+///
+/// let arr = [1, 2, 3, 4, 5];
+/// let mix: Vec<_> = pairs_wrap(&arr)
+///     .map(|(&a, &b)| (a, b))
+///     .collect();
+///
+/// assert_eq!(&mix, &[
+///     (1, 2), (2, 3), (3, 4),
+///     (4, 5), (5, 1)
+/// ])
+/// ```
 pub fn pairs_wrap<T>(arr: &[T]) -> impl Iterator<Item = (&T, &T)> {
     let second = arr.iter().skip(1).chain([&arr[0]]);
     arr.iter().zip(second)
