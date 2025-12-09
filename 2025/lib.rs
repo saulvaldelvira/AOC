@@ -13,6 +13,14 @@ macro_rules! num_digits {
     };
 }
 
+#[macro_export]
+macro_rules! dprintln {
+    ($($t:tt)*) => {
+        #[cfg(debug_assertions)]
+        println!($($t)*)
+    };
+}
+
 pub fn measure<T>(func: impl FnOnce() -> T) -> (T, Duration) {
     let start = std::time::Instant::now();
     let ret = func();
@@ -75,3 +83,7 @@ pub fn permutations<T>(arr: &[T]) -> impl Iterator<Item = (&T, &T)> {
     })
 }
 
+pub fn pairs_wrap<T>(arr: &[T]) -> impl Iterator<Item = (&T, &T)> {
+    let second = arr.iter().skip(1).chain([&arr[0]]);
+    arr.iter().zip(second)
+}
