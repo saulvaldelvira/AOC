@@ -64,7 +64,6 @@ pub fn get_input_lines() -> impl Iterator<Item = String> {
     get_input_file()
     .lines()
     .map_while(Result::ok)
-    .filter(|l| !l.is_empty())
 }
 
 pub fn get_input_matrix() -> Vec<Vec<u8>> {

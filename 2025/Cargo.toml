@@ -51,6 +51,10 @@ path = "day_10.rs"
 name = "day_11"
 path = "day_11.rs"
 
+[[bin]]
+name = "day_12"
+path = "day_12.rs"
+
 [dependencies.good_lp]
 version = "1.14.2"
 features = ["minilp"]
