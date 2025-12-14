@@ -67,6 +67,10 @@ path = "day_14.rs"
 name = "day_15"
 path = "day_15.rs"
 
+[[bin]]
+name = "day_16"
+path = "day_16.rs"
+
 [dependencies]
 fancy-regex = "0.14.0"
 itertools = "0.14.0"
