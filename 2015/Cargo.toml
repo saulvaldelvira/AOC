@@ -55,7 +55,12 @@ path = "day_11.rs"
 name = "day_12"
 path = "day_12.rs"
 
+[[bin]]
+name = "day_13"
+path = "day_13.rs"
+
 [dependencies]
 fancy-regex = "0.14.0"
+itertools = "0.14.0"
 jsonrs = "1.4.0"
 md5 = "0.7.0"
