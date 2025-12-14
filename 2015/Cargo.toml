@@ -59,8 +59,17 @@ path = "day_12.rs"
 name = "day_13"
 path = "day_13.rs"
 
+[[bin]]
+name = "day_14"
+path = "day_14.rs"
+
 [dependencies]
 fancy-regex = "0.14.0"
 itertools = "0.14.0"
 jsonrs = "1.4.0"
 md5 = "0.7.0"
+
+[dependencies.good_lp]
+version = "1.14.2"
+features = ["minilp"]
+default-features = false
