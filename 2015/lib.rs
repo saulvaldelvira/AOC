@@ -44,6 +44,26 @@ pub fn get_input_string() -> String {
     s
 }
 
+pub fn get_input_lines_mapped<T>(mut f: impl FnMut(u8) -> T) -> Vec<Vec<T>> {
+    get_input_file()
+    .lines()
+    .map_while(Result::ok)
+    .map(move |line| {
+        line.into_bytes().into_iter()
+        .map(&mut f)
+        .collect::<Vec<_>>()
+    })
+    .collect()
+}
+
+pub fn get_input_matrix() -> Vec<Vec<u8>> {
+    get_input_file()
+    .lines()
+    .map_while(Result::ok)
+    .map(|l| l.into_bytes())
+    .collect()
+}
+
 pub fn get_input_file_bytes() -> impl Iterator<Item = u8> {
     get_input_file()
     .bytes()
