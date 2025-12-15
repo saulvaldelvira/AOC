@@ -13,6 +13,22 @@ macro_rules! num_digits {
     };
 }
 
+#[macro_export]
+macro_rules! dprintln {
+    ($($t:tt)*) => {
+        #[cfg(debug_assertions)]
+        println!($($t)*)
+    };
+}
+
+#[macro_export]
+macro_rules! dprint {
+    ($($t:tt)*) => {
+        #[cfg(debug_assertions)]
+        print!($($t)*)
+    };
+}
+
 pub fn run<T>(solve: impl FnOnce() -> (T, T))
 where
     T: Display
