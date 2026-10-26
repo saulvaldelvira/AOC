@@ -1,7 +1,7 @@
 [package]
 name = "AOC_2015"
 version = "0.1.0"
-edition = "2021"
+edition = "2024"
 
 [lib]
 name = "aoc"
@@ -90,6 +90,10 @@ path = "day_20.rs"
 [[bin]]
 name = "day_21"
 path = "day_21.rs"
+
+[[bin]]
+name = "day_22"
+path = "day_22.rs"
 
 [dependencies]
 fancy-regex = "0.14.0"
