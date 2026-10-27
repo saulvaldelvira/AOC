@@ -2,7 +2,7 @@
 fn is_ok(input: &mut [u8]) -> bool {
     if let Some((first, _)) = input.iter()
                                    .enumerate()
-                                   .find(|(_, &c)| matches!(c, b'i' | b'l' | b'o'))
+                                   .find(|&(_, &c)| matches!(c, b'i' | b'l' | b'o'))
     {
         input[first] += 1;
         input.get_mut(first+1..)
