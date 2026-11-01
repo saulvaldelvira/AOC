@@ -29,9 +29,10 @@ macro_rules! dprint {
     };
 }
 
-pub fn run<T>(solve: impl FnOnce() -> (T, T))
+pub fn run<T1, T2>(solve: impl FnOnce() -> (T1, T2))
 where
-    T: Display
+    T1: Display,
+    T2: Display,
 {
     let start = std::time::Instant::now();
     let (part1,part2) = solve();
